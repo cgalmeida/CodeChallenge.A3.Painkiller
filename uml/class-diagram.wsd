@@ -1,0 +1,19 @@
+@startuml
+
+entity Patient
+
+Patient : uuid ID
+Patient : string first_name
+Patient : string last_name
+Patient : int age
+Patient : string condition
+
+Patient : create() 
+Patient : update()
+Patient : activate()
+Patient : deactivate()
+Patient : delete()
+
+
+
+@enduml

@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "painkiller"
+version = "0.1.0"
+description = ""
+authors = ["cgalmeida <carolinagalmeida.eng@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.100.1"
+uvicorn = "^0.23.1"
+sqlalchemy = "^2.0.19"
+psycopg2-binary = "^2.9.6"
+pytest = "^7.4.0"
+alembic = "^1.11.1"
+python-decouple = "^3.8"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

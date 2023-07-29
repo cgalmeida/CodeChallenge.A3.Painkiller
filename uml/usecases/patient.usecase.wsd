@@ -1,0 +1,9 @@
+@startuml
+
+:Admin: -> (Criar paciente)
+:Admin: -> (Consultar um paciente)
+' :Admin: -> (Atualizar categoria)
+' :Admin: -> (Excluir categoria)
+' :Admin: -> (Consultar categorias)
+
+@enduml
