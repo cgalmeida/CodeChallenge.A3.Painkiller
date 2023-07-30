@@ -3,7 +3,7 @@ version: "3.1"
 services:
   app:
     build:
-      context: .
+      context: ./patient_service
     ports:
       - 8000:8000
     container_name: painkiller-python-app
@@ -13,14 +13,14 @@ services:
     depends_on:
       - postgresql
     env_file:
-      - ./.env
+      - ./patient_service/.env
 
   postgresql:
     image: postgres
     ports: 
       - 5432:5432
     env_file:
-      - ./.env
+      - ./patient_service/.env
     volumes:
       - /var/cache/postgres_data:/var/lib/postgresql/data
   
@@ -29,14 +29,14 @@ services:
     ports: 
       - 5433:5432
     env_file:
-      - ./.env
+      - ./patient_service/.env
     volumes:
       - /var/cache/postgres_data_test:/var/lib/postgresql/data
 
   pgadmin:
     image: dpage/pgadmin4
     env_file:
-      - ./.env
+      - ./patient_service/.env
     ports: 
       - 5050:80
     depends_on:
