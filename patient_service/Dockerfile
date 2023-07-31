@@ -17,6 +17,7 @@ RUN poetry install --no-dev
 
 USER python
 
+COPY *.py /usr/src/app/
 COPY ./app /app
 WORKDIR /app
 
