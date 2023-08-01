@@ -1,3 +1,4 @@
+from decouple import config as decouple_config
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
@@ -7,11 +8,13 @@ from alembic import context
 from decouple import config as config_decouple
 from app.db.models import Base
 
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
 
-DB_URL = config_decouple('DB_URL')
+TEST_MODE = decouple_config('TEST_MODE', default=False, cast=bool)
+DB_URL = decouple_config('DB_URL_TEST') if TEST_MODE else decouple_config('DB_URL')
 config.set_main_option('sqlalchemy.url', DB_URL)
 
 # Interpret the config file for Python logging.

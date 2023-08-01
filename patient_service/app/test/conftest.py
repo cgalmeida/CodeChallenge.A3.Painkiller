@@ -1,7 +1,7 @@
 import pytest
 # from passlib.context import CryptContext
 from app.db.connection import Session
-# from app.db.models import Category as CategoryModel
+from app.db.models import Patient as PatientModel
 # from app.db.models import Product as ProductModel
 # from app.db.models import User as UserModel
 
@@ -21,11 +21,11 @@ def db_session():
 @pytest.fixture()
 def patients_on_db(db_session):
     patients = [
-        PatientModel(first_name='John', last_name='Doe', age=18, condition='roupa'),
-        PatientModel(first_name='Maia', last_name='Doe', age=19, condition='roupa'),
-        PatientModel(first_name='Joao', last_name='Doe', age=20, condition='roupa'),
-        PatientModel(first_name='Pedro', last_name='Doe', age=38, condition='roupa'),
-        PatientModel(first_name='Lucas', last_name='Doe', age=98, condition='roupa'),
+        PatientModel(first_name='John', last_name='Doe', age=55, condition='Healthy'),
+        PatientModel(first_name='Jane', last_name='Smith', age=30, condition='Healthy'),
+        PatientModel(first_name='James', last_name='Brown', age=50, condition='High blood pressure'),
+        PatientModel(first_name='Sarah', last_name='Johnson', age=68, condition='Diabetes'),
+        PatientModel(first_name='Michael', last_name='Williams', age=45, condition='Healthy'),
     ]
 
     for patient in patients:

@@ -1,6 +1,7 @@
 import re
 from pydantic import validator, field_validator
 from app.schemas.base import CustomBaseModel
+from uuid import UUID
 
 class Patient(CustomBaseModel):
     first_name: str
@@ -22,4 +23,10 @@ class Patient(CustomBaseModel):
             raise ValueError('Invalid age parameter')
         return value
   
+class PatientOutput(Patient):
+    # id: int
+    id: UUID
+    
+    class Config:
+        orm_mode=True
     

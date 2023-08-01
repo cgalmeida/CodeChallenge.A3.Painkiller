@@ -1,8 +1,27 @@
 # Painkiller Software Engineer Challenge
 
+## About
+
+### Decisões de projeto e arquitetura
+* Arquitetura baseada em microsserviços
+* Para manter a performance de escala horizontal as seguintes decisões foram feitas:
+  * Para que o processo de escala possa ser configurado a nível de microsserviço, os processos estão conteinerizados (com docker)
+  * Todos os microsserviços trabalham de forma stateless
+* DB e PAC:
+  * consistencia eventual
+* Resiliencia e self-healing:
+consistencia eventual
+
+```bash
+docker-compose run --user 1000 app sh -c 'alembic upgrade head'
+
+docker-compose run app sh -c "pytest -W ignore::DeprecationWarning"
+
+```
+
 <!-- This test is designed to assess the technical skills of the candidate for the Senior Software Engineer role in areas such as backend development, DevOps, and Machine Learning. -->
 
-## Instructions
+## Melhorias 
 
 <!-- For this test, we would like you to create a system that could be used in a hospital to monitor patient conditions. We have provided a sample CSV file (`patients.csv`) containing patient data that you can use to test your application. -->
 
