@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "painkiller_ms"
+name = "painkiller"
 version = "0.1.0"
 description = ""
 authors = ["cgalmeida <carolinagalmeida.eng@gmail.com>"]

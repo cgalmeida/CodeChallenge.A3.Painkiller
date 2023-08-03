@@ -6,9 +6,11 @@ from app.schemas.patient import Patient, PatientOutput
 from app.usecases.patient import PatientUseCases
 from app.routes.deps import get_db_session
 
-router = APIRouter(prefix='/patient', tags=['Patient'])
 
-@router.post('/add', status_code=status.HTTP_201_CREATED, description="Add new patient")
+router = APIRouter(prefix='/api/v1/patient', tags=['Patient'])
+
+@router.post('/', status_code=status.HTTP_201_CREATED, 
+             description="Receive a new patient's data (name, age, medical conditions, etc.) in JSON format, store it in a database, and return the patient object with an assigned ID.")
 def add_patient(
     patient: Patient,
     db_session: Session = Depends(get_db_session)
@@ -17,7 +19,8 @@ def add_patient(
     uc.add_patient(patient=patient)
     return Response(status_code=status.HTTP_201_CREATED)
 
-@router.get('/list', response_model=List[PatientOutput])
+@router.get('/list', response_model=List[PatientOutput], 
+            description="Return a paginated list with data of all patient")
 def list_patient(
     db_session: Session = Depends(get_db_session)
 ):
@@ -26,7 +29,19 @@ def list_patient(
     
     return response
 
-@router.delete('/delete/{id}', description='delete')
+@router.get('/list/{id}', 
+            description="Return the data of the patient corresponding to the patient_id.")
+def list_patient_by_id(
+    id,
+    db_session: Session = Depends(get_db_session)
+):
+    uc = PatientUseCases(db_session=db_session)
+    response = uc.list_patients_by_id(id=id)
+    
+    return response
+
+@router.delete('/delete/{id}', 
+               description="Deletes the data of the patient corresponding to the patient_id.")
 def delete_patient(
     id,
     db_session: Session = Depends(get_db_session)

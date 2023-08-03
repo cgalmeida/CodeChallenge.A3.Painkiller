@@ -13,7 +13,7 @@ def test_add_patient_route(db_session):
         "condition": "Healthy",     
     }
 
-    response = client.post('/patient/add', json=body)
+    response = client.post('/api/v1/patient', json=body)
 
     assert response.status_code == status.HTTP_201_CREATED
 
@@ -24,7 +24,7 @@ def test_add_patient_route(db_session):
     db_session.commit()
 
 def test_list_patient_route(patients_on_db):
-    response = client.get('/patient/list')
+    response = client.get('/api/v1/patient/list')
 
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
@@ -40,7 +40,7 @@ def test_delete_patient_route(db_session):
     db_session.add(patient_model)
     db_session.commit()
 
-    response = client.delete(f'/patient/delete/{patient_model.id}')
+    response = client.delete(f'/api/v1/patient/delete/{patient_model.id}')
 
     assert response.status_code == status.HTTP_200_OK
 

@@ -11,6 +11,8 @@
   * consistencia eventual
 * Resiliencia e self-healing:
 consistencia eventual
+* Autenticação: OpenID
+* NginX: proxy reverse
 
 ```bash
 docker-compose run --user 1000 app sh -c 'alembic upgrade head'

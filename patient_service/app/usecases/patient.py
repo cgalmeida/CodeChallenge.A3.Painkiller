@@ -25,6 +25,14 @@ class PatientUseCases:
         ]
         return patient_output
     
+    def list_patients_by_id(self, id):
+        patients_on_db = self.db_session.query(PatientModel).filter_by(id=id).first()
+        return patients_on_db
+        # if patients_on_db is not None:
+        #     patient_output = self.serialize_patient(patients_on_db)
+        #     return patient_output
+        # return None
+    
     def serialize_patient(self, patient_model: PatientModel):
         return PatientOutput(**patient_model.__dict__)
  
