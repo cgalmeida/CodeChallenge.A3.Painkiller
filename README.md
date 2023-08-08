@@ -1,8 +1,11 @@
 # Painkiller Software Engineer Challenge
 
-## About
-
-### Decisões de projeto e arquitetura
+## Part 1: Backend
+### About
+TODO
+### Archtecture 
+![alt text](./doc/Diagrama%20sem%20nome.drawio.png?raw=true)
+#### Decisões de projeto e arquitetura
 * Arquitetura baseada em microsserviços
 * Para manter a performance de escala horizontal as seguintes decisões foram feitas:
   * Para que o processo de escala possa ser configurado a nível de microsserviço, os processos estão conteinerizados (com docker)
@@ -21,15 +24,23 @@ docker-compose run app sh -c "pytest -W ignore::DeprecationWarning"
 
 ```
 
+## How to run??
+ - Make sure you have installed `docker` and `docker-compose`
+ - Run `docker-compose up -d`
+ <!-- - Head over to http://localhost:8080/api/v1/movies/docs for movie service docs 
+   and http://localhost:8080/api/v1/casts/docs for cast service docs -->
+# Part 2: Unit Testing
+
 <!-- This test is designed to assess the technical skills of the candidate for the Senior Software Engineer role in areas such as backend development, DevOps, and Machine Learning. -->
 
-## Melhorias 
+
 
 <!-- For this test, we would like you to create a system that could be used in a hospital to monitor patient conditions. We have provided a sample CSV file (`patients.csv`) containing patient data that you can use to test your application. -->
 
-### Part 1: Backend
+
 
 <!-- 1. **API:** Develop a REST API using FastAPI with the following endpoints: 
+### Part 1: Backend
     - `POST /api/v1/patient`: Should receive a new patient's data (name, age, medical conditions, etc.) in JSON format, store it in a database, and return the patient object with an assigned ID.
     - `GET /api/v1/patient/<patient_id>`: Should return the data of the patient corresponding to the `patient_id`.
     - `POST /api/v1/patient/<patient_id>/measurements`: Should receive and store health measurements (e.g., temperature, blood pressure) for the patient corresponding to the `patient_id`.
@@ -42,13 +53,7 @@ docker-compose run app sh -c "pytest -W ignore::DeprecationWarning"
 
 1. **Unit Testing:** Write unit tests for your application to validate its functionality and robustness.
 
-### Part 3: Machine Learning (Optional) - (Bonus)
 
-1. **Machine Learning Model:** Implement a simple Machine Learning model in the application that utilizes the measurement data to predict whether a patient has a high risk of some health problem (for example, based on fluctuations in blood pressure). Use OpenAI's API and its models for this task.
-
-2. **Model Implementation:** Demonstrate how you would implement and maintain this model in a production environment.
-
-3. **Model Monitoring:** Show how you would monitor and optimize this Machine Learning model to ensure its performance and scalability.
 
 ## Evaluation
 
@@ -94,9 +99,16 @@ Each line represents a patient, with the following fields:
 - `age`: Patient's age
 - `condition`: Patient's health condition -->
 
-## How to run??
- - Make sure you have installed `docker` and `docker-compose`
- - Run `docker-compose up -d`
- <!-- - Head over to http://localhost:8080/api/v1/movies/docs for movie service docs 
-   and http://localhost:8080/api/v1/casts/docs for cast service docs -->
 
+
+# Part 3: Machine Learning (Optional) - (Bonus)
+
+## Architecture Discussion (not implemented)
+
+1. **Machine Learning Model:** <!-- -Implement a simple Machine Learning model in the application that utilizes the measurement data to predict whether a patient has a high risk of some health problem (for example, based on fluctuations in blood pressure). Use OpenAI's API and its models for this task.-->
+
+2. **Model Implementation:**  <!-- -Demonstrate how you would implement and maintain this model in a production environment.-->
+
+3. **Model Monitoring:** <!-- - Show how you would monitor and optimize this Machine Learning model to ensure its performance and scalability.-->
+
+![alt text](./doc/Diagrama%20sem%20nome.drawio.png?raw=true)
