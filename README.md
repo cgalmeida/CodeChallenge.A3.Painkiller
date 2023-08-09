@@ -1,10 +1,17 @@
 # Painkiller Software Engineer Challenge
+<p align="center">
+ <img width ='50px' src='./doc/fastapi-1.svg'>
+ <img width ='50px' src='./doc/nginx-icon.png'>
+ <img width ='50px'src='./doc/postgres.png'>
+ <img width ='46px'src='./doc/rabbitmq.png'>
+</p>
+
 <!--ts-->
    * [Part 1: Backend](#backend)
       * [About](#about)
-      * [Archtecture](#archtecture)
-      * [API Documentation](#API-Documentation)
+      * [Architecture](#architecture)
       * [How to run?](#how-to-run)
+      * [API Documentation](#API-Documentation)
       * [Further steps](#further-steps)
    * [Part 2: Unit Testing](#unit-testing)
       * [About](#implementation)
@@ -37,33 +44,50 @@ The API also provides the following endpoints for CRUD operations:
     /api/v1/patient/docs
     /api/v1/measurements/docs
 ```
-### Archtecture 
-![alt text](./doc/Diagrama%20sem%20nome.drawio.png?raw=true)
-#### Decisões de projeto e arquitetura TODO
-* Arquitetura baseada em microsserviços
-* Para manter a performance de escala horizontal as seguintes decisões foram feitas:
-  * Para que o processo de escala possa ser configurado a nível de microsserviço, os processos estão conteinerizados (com docker)
-  * Todos os microsserviços trabalham de forma stateless
-* DB e PAC:
-  * consistencia eventual
-* Resiliencia e self-healing:
-consistencia eventual
-* Autenticação: OpenID
-* NginX: proxy reverse
+### Architecture 
+<p align="center">
+ <img  src='./doc/Diagrama.png'>
+ </p>
 
+* Application is divided intotwo microservices: `patient_service` for managing patients and `measurement_service` for managing measurements.
+
+* To maintain horizontal scale performance the processes are containerized (with docker), allowing application scaling process to be configured at microservice level.
+
+* Postgres was adopted as the database. A relational database was chosen because it performs better in read-intensive applications. Each microservice has its own database. A schema overlay was planned on the `patient_service` to reduce network overhead between the microservices. A third base is used for unit tests.
+
+* Rabbitmq was used as a messaging system between services
+
+* NGINX was adopted as a reverse proxy
 ## How to run
  - Make sure you have installed `docker` and `docker-compose`
  - Run `docker-compose up -d`
- <!-- - Head over to http://localhost:8080/api/v1/movies/docs for movie service docs 
-   and http://localhost:8080/api/v1/casts/docs for cast service docs -->
 
-```bash
-docker-compose run --user 1000 app sh -c 'alembic upgrade head'
+* migrations:
+ One running for first time, if necessary, DB can be initialized from alembic migrations, for instance:
+
+ ```bash
 docker-compose run --user 1000 measurement_service sh -c 'alembic upgrade head'
+```
 
-docker-compose run app sh -c "pytest -W ignore::DeprecationWarning"
+* application:
+ application can be started running the following command:
+
+ ```bash
+cd /CodeChallenge.A3.Painkiller
+docker-compose up --build'
+```
+## API Documentation
+
+Swagger API Documentation can be found at 
 
 ```
+/api/v1/patient/docs
+/api/v1/measurements/docs
+```
+
+## Further steps
+TODO
+
 # Unit Testing
 ## Implementation
 1. **Unit Testing:** The unit tests for this application were built using the tdd methodology, using `pytest`. An postgressql service was configured as db test instance for test isolation.
@@ -71,45 +95,22 @@ docker-compose run app sh -c "pytest -W ignore::DeprecationWarning"
 ## Test Run
 Tests for each service can be run with the following command:
 
-```
+```bash
 docker-compose run <container_service_name> sh -c "pytest -W ignore::DeprecationWarning"
 
 ```
 
 Example for measurement_service:
 
-```
+```bash
 docker-compose run measurement_service sh -c "pytest -W ignore::DeprecationWarning"
 
 ```
 
-<!--
-2. **Microservices:** Divide the application into at least two microservices: one for managing patients and another for managing measurements.
--->
-
-<!--
-
-## Evaluation
-
-You will be evaluated on:
-
-- Code quality: Easy to understand, clean, and well-structured.
-- Adherence to requirements: All requirements must be met.
-- Documentation: Clear documentation of how to install, configure, and run the application.
-- Testing: The application should have adequate test coverage, including unit tests.
-- Solution architecture: How the different parts of the application work together.
-
-
-Please include in the repository:
-
-- All source code.
-- A README.md file with detailed instructions on how to install, configure, and run the application.
-- Any other documentation you find necessary.
--->
-
 # Part 3: Machine Learning (Optional) - (Bonus)
 
 ## Architecture Discussion (not implemented)
+TODO
 
 1. **Machine Learning Model:** <!-- -Implement a simple Machine Learning model in the application that utilizes the measurement data to predict whether a patient has a high risk of some health problem (for example, based on fluctuations in blood pressure). Use OpenAI's API and its models for this task.-->
 
