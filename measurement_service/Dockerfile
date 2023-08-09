@@ -8,6 +8,9 @@ ENV PYTHONUNBUFFERED 1
 ENV PATH="/root/./local/bin:$PATH"
 ENV PYTHONPATH='/'
 
+COPY ./requirements.txt /
+RUN pip install -r requirements.txt
+
 COPY ./poetry.lock /
 COPY ./pyproject.toml /
 
