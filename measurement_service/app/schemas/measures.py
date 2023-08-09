@@ -12,20 +12,6 @@ class Measurement(CustomBaseModel):
     diabetes: bool
     patient_id: UUID
 
-    # #TODO
-    # @field_validator('blod_pressure_sys')
-    # def validate_blod_pressure_sys(cls, value):
-    #     if value not in range(0, 150):
-    #         raise ValueError('Invalid age parameter')
-    #     return value
-    
-    # @field_validator('blod_pressure_dias')
-    # def validate_blod_pressure_dias(cls, value):
-    #     if value not in range(0, 150):
-    #         raise ValueError('Invalid age parameter')
-    #     return value
-
-
 class MeasurementOutput(Measurement):
     # id: int
     id: UUID

@@ -1,25 +1,20 @@
-from fastapi import FastAPI
+import pika
+from fastapi import FastAPI, Body
 from app.routes.patient_routes import router as patient_routes
-# from app.routes.product_routes import router as product_routes
-# from app.routes.user_routes import router as user_routes
-# from app.routes.poc import router as poc_routes
-from starlette.exceptions import HTTPException
-from fastapi.exceptions import RequestValidationError
-from app.exception_handlers import request_validation_exception_handler, http_exception_handler, unhandled_exception_handler
-from app.middleware import log_request_middleware
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# app.middleware("http")(log_request_middleware)
-# app.add_exception_handler(RequestValidationError, request_validation_exception_handler)
-# app.add_exception_handler(HTTPException, http_exception_handler)
-# app.add_exception_handler(Exception, unhandled_exception_handler)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+    allow_credentials=True,
+)
 
-@app.get('/health-check')
+@app.get('health-check')
 def health_check():
     return True
 
 app.include_router(patient_routes)
-# app.include_router(product_routes)
-# app.include_router(user_routes)
-# app.include_router(poc_routes)

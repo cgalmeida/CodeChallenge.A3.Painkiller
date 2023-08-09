@@ -1,9 +1,10 @@
 from typing import List
 from uuid import UUID
-from fastapi import APIRouter, Depends, Response, status
+from fastapi import APIRouter, Depends, Response, status, Body
 from sqlalchemy.orm import Session
 from app.schemas.patient import Patient, PatientOutput
 from app.usecases.patient import PatientUseCases
+from app.usecases.queue_message import QueueMessageUseCases
 from app.routes.deps import get_db_session
 
 
@@ -50,4 +51,11 @@ def delete_patient(
     uc.delete_patient(id=id)
     
     return Response(status_code=status.HTTP_200_OK)
+
+@router.post("/send")
+async def send_message(message: str = Body(..., embed=True)):
+    print("do something...")
+    qm = QueueMessageUseCases()
+    resp = await qm.send_message(message)
+    return resp
 
