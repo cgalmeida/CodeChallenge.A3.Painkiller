@@ -21,7 +21,7 @@ def add_patient(
     return Response(status_code=status.HTTP_201_CREATED)
 
 @router.get('/list', response_model=List[PatientOutput], 
-            description="Return a paginated list with data of all patient")
+            description="Return list with data of all patient")
 def list_patient(
     db_session: Session = Depends(get_db_session)
 ):
@@ -30,7 +30,7 @@ def list_patient(
     
     return response
 
-@router.get('/list/{id}', 
+@router.get('/{id}', 
             description="Return the data of the patient corresponding to the patient_id.")
 def list_patient_by_id(
     id,

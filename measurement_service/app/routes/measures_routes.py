@@ -68,10 +68,3 @@ def delete_measures(
     uc.delete_measure(id=id)
     
     return Response(status_code=status.HTTP_200_OK)
-
-@router.post("/send")
-async def send_message(message: str = Body(..., embed=True)):
-    print("do something...")
-    qm = QueueMessageUseCases()
-    resp = await qm.send_message(message)
-    return resp
