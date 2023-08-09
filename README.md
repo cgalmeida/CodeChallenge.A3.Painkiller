@@ -1,11 +1,45 @@
 # Painkiller Software Engineer Challenge
-
-## Part 1: Backend
+<!--ts-->
+   * [Part 1: Backend](#backend)
+      * [About](#about)
+      * [Archtecture](#archtecture)
+      * [API Documentation](#API-Documentation)
+      * [How to run?](#how-to-run)
+      * [Further steps](#further-steps)
+   * [Part 2: Unit Testing](#unit-testing)
+      * [About](#implementation)
+      * [How to run?](#test-run)
+   * [Part 3: Machine Learning](#unit-testing)
+      * [Architecture Discussion (not implemented)](#implementation)
+<!--te-->
+## Backend
 ### About
-TODO
+ Painkiller is REST FastAPI with the following endpoints:
+* ```POST /api/v1/patient```: Receive a new patient's data (name, age, medical conditions, etc.) in JSON format, store it in a database, and return the patient object with an assigned ID.
+
+* `GET /api/v1/patient/<patient_id>`: Returns the data of the patient corresponding to the `patient_id`.
+
+* `POST /api/v1/patient/<patient_id>/measurements`: Receives and stores health measurements (e.g., temperature, blood pressure) for the patient corresponding to the patient_id.
+
+The API also provides the following endpoints for CRUD operations: 
+
+* Patients:
+* `POST /api/v1/patient/list`: Return list with data of all patient
+* `POST /api/v1/patient/delete/<patient_id>`: Deletes the data of the patient corresponding to the patient_id.
+
+* Measurements:
+* `POST /api/v1/measurements/list`: Return list with data of all measures
+* `POST /api/v1/measurements/delete/<patient_id>`: Deletes the data of the measures corresponding to the measures_id.
+
+```
+🚩For more details and payload examples, please check the api doc at:
+
+    /api/v1/patient/docs
+    /api/v1/measurements/docs
+```
 ### Archtecture 
 ![alt text](./doc/Diagrama%20sem%20nome.drawio.png?raw=true)
-#### Decisões de projeto e arquitetura
+#### Decisões de projeto e arquitetura TODO
 * Arquitetura baseada em microsserviços
 * Para manter a performance de escala horizontal as seguintes decisões foram feitas:
   * Para que o processo de escala possa ser configurado a nível de microsserviço, os processos estão conteinerizados (com docker)
@@ -17,43 +51,43 @@ consistencia eventual
 * Autenticação: OpenID
 * NginX: proxy reverse
 
-```bash
-docker-compose run --user 1000 app sh -c 'alembic upgrade head'
-
-docker-compose run app sh -c "pytest -W ignore::DeprecationWarning"
-
-```
-
-## How to run??
+## How to run
  - Make sure you have installed `docker` and `docker-compose`
  - Run `docker-compose up -d`
  <!-- - Head over to http://localhost:8080/api/v1/movies/docs for movie service docs 
    and http://localhost:8080/api/v1/casts/docs for cast service docs -->
-# Part 2: Unit Testing
 
-<!-- This test is designed to assess the technical skills of the candidate for the Senior Software Engineer role in areas such as backend development, DevOps, and Machine Learning. -->
+```bash
+docker-compose run --user 1000 app sh -c 'alembic upgrade head'
+docker-compose run --user 1000 measurement_service sh -c 'alembic upgrade head'
 
+docker-compose run app sh -c "pytest -W ignore::DeprecationWarning"
 
+```
+# Unit Testing
+## Implementation
+1. **Unit Testing:** The unit tests for this application were built using the tdd methodology, using `pytest`. An postgressql service was configured as db test instance for test isolation.
 
-<!-- For this test, we would like you to create a system that could be used in a hospital to monitor patient conditions. We have provided a sample CSV file (`patients.csv`) containing patient data that you can use to test your application. -->
+## Test Run
+Tests for each service can be run with the following command:
 
+```
+docker-compose run <container_service_name> sh -c "pytest -W ignore::DeprecationWarning"
 
+```
 
-<!-- 1. **API:** Develop a REST API using FastAPI with the following endpoints: 
-### Part 1: Backend
-    - `POST /api/v1/patient`: Should receive a new patient's data (name, age, medical conditions, etc.) in JSON format, store it in a database, and return the patient object with an assigned ID.
-    - `GET /api/v1/patient/<patient_id>`: Should return the data of the patient corresponding to the `patient_id`.
-    - `POST /api/v1/patient/<patient_id>/measurements`: Should receive and store health measurements (e.g., temperature, blood pressure) for the patient corresponding to the `patient_id`.
+Example for measurement_service:
 
+```
+docker-compose run measurement_service sh -c "pytest -W ignore::DeprecationWarning"
+
+```
+
+<!--
 2. **Microservices:** Divide the application into at least two microservices: one for managing patients and another for managing measurements.
+-->
 
-3. **Database:** Implement CRUD operations in a database of your choice to manage the data of the patients and their measurements.
-
-### Part 2: Unit Testing
-
-1. **Unit Testing:** Write unit tests for your application to validate its functionality and robustness.
-
-
+<!--
 
 ## Evaluation
 
@@ -65,41 +99,13 @@ You will be evaluated on:
 - Testing: The application should have adequate test coverage, including unit tests.
 - Solution architecture: How the different parts of the application work together.
 
-## Delivery
-
-Deliver on Gupy.
 
 Please include in the repository:
 
 - All source code.
 - A README.md file with detailed instructions on how to install, configure, and run the application.
 - Any other documentation you find necessary.
-
-Good luck!
-
----
-
-# Sample CSV File
-
-The `patients.csv` file contains patient data that can be used to test your application. It has the following format:
-
-```
-patient_id,first_name,last_name,age,condition
-1,John,Doe,55,Healthy
-2,Jane,Smith,30,Healthy
-3,James,Brown,50,High blood pressure
-...
-```
-
-Each line represents a patient, with the following fields:
-
-- `patient_id`: Patient ID (unique)
-- `first_name`: Patient's first name
-- `last_name`: Patient's last name
-- `age`: Patient's age
-- `condition`: Patient's health condition -->
-
-
+-->
 
 # Part 3: Machine Learning (Optional) - (Bonus)
 
