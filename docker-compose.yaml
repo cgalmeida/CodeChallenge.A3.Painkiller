@@ -9,7 +9,9 @@ services:
     container_name: painkiller-python-app
     volumes:
       - ./patient_service/app:/app
-    command: sh -c "uvicorn main:app --host 0.0.0.0 --reload --port 8000"
+    command: 
+        # sh -c "python listener.py"
+        sh -c "uvicorn main:app --host 0.0.0.0 --reload --port 8000"
     depends_on:
       - postgresql-measurement-svc2
     env_file:
@@ -25,7 +27,8 @@ services:
     container_name: painkiller-measurement-python-app
     volumes:
       - ./measurement_service/app:/app
-    command: sh -c "uvicorn main:app --host 0.0.0.0 --reload --port 8000"
+    command: 
+      sh -c "uvicorn main:app --host 0.0.0.0 --reload --port 8000"
     depends_on:
       - postgresql
     env_file:

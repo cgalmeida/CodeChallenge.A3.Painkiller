@@ -52,10 +52,3 @@ def delete_patient(
     
     return Response(status_code=status.HTTP_200_OK)
 
-@router.post("/send")
-async def send_message(message: str = Body(..., embed=True)):
-    print("do something...")
-    qm = QueueMessageUseCases()
-    resp = await qm.send_message(message)
-    return resp
-
