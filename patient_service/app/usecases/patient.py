@@ -32,9 +32,14 @@ class PatientUseCases:
         uc = MeasurementUseCases()
         measurements_on_db = uc.list_measurements_by_patients_id(patient_id=id)
 
-        person_dict = patients_on_db.to_dict()
+        patients_dict = patients_on_db.to_dict()
+        result.update(patients_dict)
+
+        if (measurements_on_db is None):
+            result['measurements'] = {}
+            return result
+        
         measurements_dict = measurements_on_db.to_dict()
-        result.update(person_dict)
         result['measurements'] = measurements_dict
         
         return result

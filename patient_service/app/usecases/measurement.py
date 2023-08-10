@@ -8,7 +8,6 @@ class MeasurementUseCases:
 
     def add_patient_from_queue(self, measurement_message: str):
         measurement = message_to_json(data=measurement_message)
-        print(measurement)
         measurement_model = MeasurementModel(**measurement)
         self.db_session.add(measurement_model)
         self.db_session.commit()

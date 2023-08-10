@@ -49,7 +49,7 @@ def list_measures_by_id(
 
 @router.get('/{patient_id}/list/', 
             description="Return the data of the measures corresponding to the measures_id.")
-def list_measures_by_id(
+def list_measures_by_patient_id(
     patient_id,
     db_session: Session = Depends(get_db_session)
 ):

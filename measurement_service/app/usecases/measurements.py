@@ -1,7 +1,6 @@
 from sqlalchemy.orm import Session
 from app.db.models import Measurements as MeasurementModel
 from app.schemas.measures import Measurement, MeasurementOutput
-from uuid import UUID
 from fastapi.exceptions import HTTPException
 from fastapi import status
 # from fastapi_pagination import Params

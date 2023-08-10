@@ -41,8 +41,8 @@ The API also provides the following endpoints for CRUD operations:
 ```
 🚩For more details and payload examples, please check the api doc at:
 
-    /api/v1/patient/docs
-    /api/v1/measurements/docs
+    /api/v1/patient/docs#/
+    /api/v1/measures/docs#/
 ```
 ### Architecture 
 <p align="center">
@@ -80,13 +80,15 @@ docker-compose up --build'
 
 Swagger API Documentation can be found at 
 
+```bash
+/api/v1/patient/docs#/
 ```
-/api/v1/patient/docs
-/api/v1/measurements/docs
-```
+<img  src='./doc/patient_doc.png'>
 
-## Further steps
-TODO
+```bash
+/api/v1/measures/docs#/
+```
+<img  src='./doc/measurement_doc.png'>
 
 # Unit Testing
 ## Implementation
@@ -110,12 +112,18 @@ docker-compose run measurement_service sh -c "pytest -W ignore::DeprecationWarni
 # Part 3: Machine Learning (Optional) - (Bonus)
 
 ## Architecture Discussion (not implemented)
-TODO
 
-1. **Machine Learning Model:** <!-- -Implement a simple Machine Learning model in the application that utilizes the measurement data to predict whether a patient has a high risk of some health problem (for example, based on fluctuations in blood pressure). Use OpenAI's API and its models for this task.-->
+The following architecture uses Azure infrastructure for discussion purpose only.
 
-2. **Model Implementation:**  <!-- -Demonstrate how you would implement and maintain this model in a production environment.-->
+![alt text](./doc/ml_diagrama.png?raw=true)
 
-3. **Model Monitoring:** <!-- - Show how you would monitor and optimize this Machine Learning model to ensure its performance and scalability.-->
+* Data Preparation: Apache Airflow ETL orchestration can used for sourcing, cleaning, and transforming and transfer data to `measurement data lake`. 
 
-![alt text](./doc/Diagrama%20sem%20nome.drawio.png?raw=true)
+* Model Development: this includes core components of the model development process such as experiment tracking and model registration using MLflow.
+
+* Model Deployment: this includes implementing a CI/CD pipeline to build and deploy solutions for batch inference workloads and online inference workloads. For online inference workloads, machine learning models can be containerized with docker as API services and deployed to an Azure Kubernetes cluster with Azure API Management exposing them to the outside world. 
+
+* For batch inference workloads, jobs consuming the model will be executed using an orchestration tool (such as Apache Airflow).
+
+* Model Monitoring: this includes monitoring the API performance and data drift by analyzing log telemetry with Grafana (Prometheus).
+

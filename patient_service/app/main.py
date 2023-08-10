@@ -5,7 +5,7 @@ import asyncio
 from app.usecases.queue_message import QueueMessageUseCases
 
 
-app = FastAPI()
+app = FastAPI(docs_url="/api/v1/patient/docs", openapi_url="/api/v1/patient/docs/openapi.json")
 
 app.add_middleware(
     CORSMiddleware,
